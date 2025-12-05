@@ -8,7 +8,7 @@ import heroGifting from "../assets/gifting.png";
 import heroChristmas from "../assets/christmas.png";
 import heroSale from "../assets/salee.png";
 
-const SLIDE_DURATION = 5000; // 5s 
+const SLIDE_DURATION = 5000; // 5s
 
 const slides = [
   {
@@ -20,6 +20,7 @@ const slides = [
       "Order by 5pm for same day London* delivery\nor by 3pm for next day delivery UK*",
     bgColor: "#FFF0C8",
     image: heroAutumn,
+    // default (desktop / ipad / non-mobile colors)
     titleColor: "#222222",
     btnBg: "#59670d",
     btnText: "#ffffff",
@@ -73,8 +74,43 @@ const SLIDE_DURATION_MS = SLIDE_DURATION;
 
 const HeroBanner = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // detect mobile viewport (max-width: 767px)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const mq = window.matchMedia("(max-width: 767px)");
+
+    const updateIsMobile = () => {
+      setIsMobile(mq.matches);
+    };
+
+    updateIsMobile(); // initial
+    mq.addEventListener("change", updateIsMobile);
+
+    return () => mq.removeEventListener("change", updateIsMobile);
+  }, []);
+
   const activeSlide = slides[activeIndex];
 
+  // ✅ mobile-only override for AUTUMN & GIFTING
+  const isMobileOverrideSlide =
+    isMobile &&
+    (activeSlide.key === "AUTUMN" || activeSlide.key === "GIFTING");
+
+  const titleColor = isMobileOverrideSlide
+    ? "#ffffff"
+    : activeSlide.titleColor;
+
+  const btnBg = isMobileOverrideSlide ? "#ffffff" : activeSlide.btnBg;
+
+  const btnText = isMobileOverrideSlide ? "#000000" : activeSlide.btnText;
+
+  // note color mobile pe bhi same chhodte hain (tum nahi bole change karna)
+  const noteColor = activeSlide.noteColor;
+
+  // auto slide
   useEffect(() => {
     const timer = setTimeout(() => {
       setActiveIndex((prev) => (prev + 1) % slides.length);
@@ -106,7 +142,7 @@ const HeroBanner = () => {
           <div className="hero-banner__content">
             <h1
               className="hero-banner__title"
-              style={{ color: activeSlide.titleColor }}
+              style={{ color: titleColor }}
             >
               {activeSlide.titleLines.map((line, i) => (
                 <React.Fragment key={i}>
@@ -119,8 +155,8 @@ const HeroBanner = () => {
             <button
               className="hero-banner__btn"
               style={{
-                backgroundColor: activeSlide.btnBg,
-                color: activeSlide.btnText,
+                backgroundColor: btnBg,
+                color: btnText,
               }}
             >
               {activeSlide.buttonText}
@@ -128,7 +164,7 @@ const HeroBanner = () => {
 
             <p
               className="hero-banner__note"
-              style={{ color: activeSlide.noteColor }}
+              style={{ color: noteColor }}
             >
               {activeSlide.note.split("\n").map((line, i) => (
                 <React.Fragment key={i}>
