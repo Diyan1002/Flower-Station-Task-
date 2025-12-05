@@ -129,7 +129,7 @@ body {
 .hero-line {
   position: relative;
   width: 120%;
-  max-width: 90px; 
+  max-width: 90px;
   height: 4px;
   margin-top: 4px;
   background: rgba(255, 255, 255, 0.2); 
@@ -145,7 +145,7 @@ body {
   backdrop-filter: blur(3px);
 }
 
-/* Active slide */
+/* Active slide – line fill animation */
 .hero-link--active .hero-line__fill {
   animation: heroLineFill var(--slide-duration) linear forwards;
 }
@@ -159,7 +159,7 @@ body {
   }
 }
 
-/* ================ MOBILE HERO ================ */
+/* ================ MOBILE HERO  ================ */
 @media (max-width: 767px) {
   .hero-banner {
     display: block; 
@@ -187,13 +187,13 @@ body {
     position: absolute;
     inset: 0;
     padding: 0 24px;
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 2; 
   }
 
-  /* logo hide on mobile */
   .hero-banner__logo {
     display: none;
   }
@@ -218,11 +218,12 @@ body {
   .hero-banner__btn {
     margin-top: 6px;
     padding: 10px 28px;
+    /* colors from inline per slide */
     font-size: 13px;
   }
 
   .hero-banner__note {
-    display: none;
+    display: none; 
   }
 
   .hero-banner__links {
@@ -239,7 +240,6 @@ body {
     height: 3px;
   }
 }
-/* ===== REMOVE HERO COLOR ON MOBILE ===== */
 @media (max-width: 767px) {
   .hero-banner__left {
     background: transparent !important;
