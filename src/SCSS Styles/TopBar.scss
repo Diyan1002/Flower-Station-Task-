@@ -1,0 +1,100 @@
+.topbar {
+  position: fixed;            
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #f8ece5; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 24px;         
+  font-size: 11px;
+  line-height: 3;            
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #333;
+  margin-bottom: 0;            
+  overflow-x: hidden;         
+
+&__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+&__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-right: 20px;     
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+  &__icon {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    display: block;
+    cursor: pointer;
+  }
+
+ &__center {
+  text-align: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 12px;          
+  font-weight: 400;        
+}
+
+  &__link {
+    text-decoration: none;
+    color: inherit;
+    font-size: 11px;
+    transition: opacity 0.2s ease;
+    font-family: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #333;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__separator {
+    opacity: 0.5;
+    font-size: 11px;
+  }
+}
+
+/* ================= iPad & Mobile Responsive ================= */
+@media (max-width: 1024px) {
+  .topbar {
+    padding: 4px 12px;
+
+    &__left {
+      display: none;  
+    }
+
+    &__right {
+      display: none;  
+    }
+
+    &__center {
+      flex: 1;
+      text-align: center;
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+}
